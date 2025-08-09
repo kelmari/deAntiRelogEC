@@ -1,0 +1,4 @@
+name: deAntiRelogEC
+version: '${project.version}'
+main: ru.dercec.plugin.deantirelogec.deAntiRelogEC
+api-version: '1.16'
