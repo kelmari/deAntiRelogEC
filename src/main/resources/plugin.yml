@@ -2,3 +2,15 @@ name: deAntiRelogEC
 version: '${project.version}'
 main: ru.dercec.plugin.deantirelogec.deAntiRelogEC
 api-version: '1.16'
+depend: [powerantirelog]
+
+commands:
+  deantirelogec:
+    permission: deantirelogec.reload
+    description: "Перезагружает конфиг"
+
+permissions:
+  deantirelogec.reload:
+    default: op
+  deantirelogec.bypass:
+    default: op

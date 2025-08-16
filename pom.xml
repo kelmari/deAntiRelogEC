@@ -6,7 +6,7 @@
 
   <groupId>ru.dercec.plugin</groupId>
   <artifactId>deAntiRelogEC</artifactId>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
   <packaging>jar</packaging>
 
   <name>deAntiRelogEC</name>
@@ -23,8 +23,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <source>14</source>
+          <target>14</target>
         </configuration>
       </plugin>
       <plugin>
@@ -66,6 +66,13 @@
           <artifactId>paper-api</artifactId>
           <version>1.16.5-R0.1-SNAPSHOT</version>
           <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <artifactId>PowerAntiRelog</artifactId>
+          <groupId>me.katze</groupId>
+          <scope>system</scope>
+          <version>1.6.1</version>
+          <systemPath>${basedir}/lib/PowerAntiRelog-1.6.1.jar</systemPath>
       </dependency>
   </dependencies>
 </project>
