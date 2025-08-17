@@ -4,30 +4,23 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
-import ru.dercec.plugin.deantirelogec.deAntiRelogEC;
+import ru.dercec.plugin.deantirelogec.config.Config;
 
 public class ReloadCommand implements CommandExecutor {
+    private final Config config;
 
-    private deAntiRelogEC plugin;
-
-    public ReloadCommand(deAntiRelogEC var1){
-        this.plugin = var1;
+    public ReloadCommand(Config config) {
+        this.config = config;
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(commandSender.hasPermission("deantirelogec.reload")){
-            if(strings.length >= 1) {
-                if(strings[0].equalsIgnoreCase("reload")){
-                plugin.config.init();
-                commandSender.sendMessage("Конфиг успешно перезагружен!");
-                return true;
-                }
-            }
-            plugin.config.init();
-            commandSender.sendMessage("Конфиг успешно перезагружен!");
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
+        if (sender.hasPermission("deantirelogec.reload")) {
+            config.reload();
+            sender.sendMessage(config.getReloadMessage());
             return true;
         }
-        return false;
+        sender.sendMessage(config.getNoPermsMessage());
+        return true;
     }
 }
