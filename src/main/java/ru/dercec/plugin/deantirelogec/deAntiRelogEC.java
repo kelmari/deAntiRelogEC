@@ -1,37 +1,26 @@
 package ru.dercec.plugin.deantirelogec;
 
-import me.katze.powerantirelog.manager.PvPManager;
-import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import me.katze.powerantirelog.AntiRelog;
 import ru.dercec.plugin.deantirelogec.command.ReloadCommand;
-import ru.dercec.plugin.deantirelogec.config.ConfigData;
+import ru.dercec.plugin.deantirelogec.config.Config;
 import ru.dercec.plugin.deantirelogec.listener.Listeners;
 
 public final class deAntiRelogEC extends JavaPlugin {
 
-    public PvPManager pvpManager;
-    public ConfigData config;
-
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-        config = new ConfigData(this);
-        if(Bukkit.getServer().getPluginManager().getPlugin("powerantirelog").isEnabled()){
-            AntiRelog antiRelog = (AntiRelog) Bukkit.getPluginManager().getPlugin("powerantirelog");
-            pvpManager = antiRelog.pvpmanager;
-        } else {
-            Bukkit.getLogger().info("Плагин был выключен из-за того что отсутствует плагин PowerAntiRelog");
-            getServer().getPluginManager().disablePlugin(this);
-        }
-        config.init();
-        Bukkit.getPluginManager().registerEvents(new Listeners(this, pvpManager), this);
-        getCommand("deantirelogec").setExecutor(new ReloadCommand(this));
-
-    }
-
-    @Override
-    public void onDisable() {
+        PluginManager pm = getServer().getPluginManager();
+        // Эта проверка не имеет смысла, если плагин находится в depend и отсутствует
+        // на сервере - исключение будет выброшено раньше, чем в onEnable
+        //if (!pm.isPluginEnabled("powerantirelog")) {
+        //    getLogger().info("Плагин был выключен из-за того, что отсутствует плагин PowerAntiRelog");
+        //    pm.disablePlugin(this);
+        //    return;
+        //}
+        Config config = new Config(this);
+        pm.registerEvents(new Listeners(config), this);
+        getCommand("deantirelogec").setExecutor(new ReloadCommand(config));
 
     }
 }

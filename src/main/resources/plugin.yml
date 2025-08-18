@@ -6,11 +6,4 @@ depend: [powerantirelog]
 
 commands:
   deantirelogec:
-    permission: deantirelogec.reload
     description: "Перезагружает конфиг"
-
-permissions:
-  deantirelogec.reload:
-    default: op
-  deantirelogec.bypass:
-    default: op
